@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +17,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className={inter.className}>
+      <body>
+        <section className="fog">
+          <div className="bg-color-overlap"></div>
+          <div className="absolute-bg"></div>
+          <div className="fog-container">
+            <div className="fog-img fog-img-first"></div>
+            <div className="fog-img fog-img-second"></div>
+          </div>
+        </section>
+        <div className="z-10 top-0 left-0 absolute text-foreground w-full flex flex-col h-screen justify-between">
+          <Header />
+          <main>
+            {children}
+          </main>
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }
