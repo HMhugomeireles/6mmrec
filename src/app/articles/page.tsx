@@ -12,6 +12,7 @@ import { getClient } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { SanityDocument } from "next-sanity";
 import Image from "next/image";
+import Link from "next/link";
 
 const EVENT_QUERY_POSTS = `
 *[_type == "post"] 
@@ -49,19 +50,21 @@ export default async function Articles() {
 
         <section className="mt-10 text-white">
             {posts.map(post => (
-              <Card key={post._id} className="text-white m-10">
-                <CardContent className="">
-                  <article key={post._id} className="m-10">
-                    <div className="hidden sm:block lg:cursor-pointer" style={{ position: 'relative', height: '415px' }}>
-                      <Image src={urlFor(post.mainImage.asset).url()} alt={post.mainImage.alt} fill sizes="100%" style={{ objectFit: 'cover' }} />
-                    </div>
-                    <div className="sm:hidden lg:cursor-pointer" style={{ position: 'relative', height: '215px' }}>
-                      <Image src={urlFor(post.mainImage.asset).url()} alt={post.mainImage.alt} fill sizes="100%" style={{ objectFit: 'cover' }} />
-                    </div>
-                    <h3 className="text-4xl font-extrabold">{post.title}</h3>
-                  </article>
-                </CardContent>
-              </Card>
+              <Link key={post.slug.current} href={`/articles/${post.slug.current}`}>
+                <Card  className="text-white m-10">
+                  <CardContent className="">
+                    <article key={post._id} className="m-10">
+                      <div className="hidden sm:block lg:cursor-pointer" style={{ position: 'relative', height: '415px' }}>
+                        <Image src={urlFor(post.mainImage.asset).url()} alt={post.mainImage.alt} fill sizes="100%" style={{ objectFit: 'cover' }} />
+                      </div>
+                      <div className="sm:hidden lg:cursor-pointer" style={{ position: 'relative', height: '215px' }}>
+                        <Image src={urlFor(post.mainImage.asset).url()} alt={post.mainImage.alt} fill sizes="100%" style={{ objectFit: 'cover' }} />
+                      </div>
+                      <h3 className="text-4xl font-extrabold">{post.title}</h3>
+                    </article>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
         </section>
 

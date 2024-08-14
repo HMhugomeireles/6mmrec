@@ -70,7 +70,7 @@ export default async function Article({
                 <div>
                   <Card className="max-w-fit p-4 mt-10 border-none bg-[#2F3541]">
                     <div className="flex items-center">
-                      <Image src={urlFor(article.author.image.asset).url()} alt="author" width={80} height={80} />
+                      <Image src={urlFor(article.author.image.asset).url()} alt="author" width={100} height={100} className="mr-4 rounded-xl" />
                       <div className="text-gray-300 text-lg">
                         <div className="font-semibold">{article.author.name}</div>
                         <div className="text-sm">{articleDate}</div>

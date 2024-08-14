@@ -3,7 +3,7 @@ import { Heading } from "@/components/Heading";
 import { News } from "@/components/News";
 
 
-export default async function Home({ draftMode = false }) {
+export default async function Home() {
   return (
     <div className="container">
 
@@ -12,7 +12,7 @@ export default async function Home({ draftMode = false }) {
           <Heading text="Last News" />
         </section>
         <section className="grid grid-cols-12 lg:grid-rows-3 bg-[#292E37] ">
-          <News draftMode={draftMode} />
+          <News />
         </section>
       </section>
 

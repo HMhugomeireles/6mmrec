@@ -10,7 +10,7 @@ import { urlFor } from "@/sanity/lib/image";
 
 
 type NewsProps = {
-  draftMode: boolean
+  draftMode?: boolean
 }
 
 const EVENT_QUERY_POSTS = `
@@ -25,7 +25,7 @@ const EVENT_QUERY_POSTS = `
 export async function News({
   draftMode
 }: NewsProps) {
-  const client = getClient(draftMode ? token : undefined);
+  const client = getClient();
   const posts = await client.fetch<SanityDocument[]>(EVENT_QUERY_POSTS);
 
   console.log(posts)
