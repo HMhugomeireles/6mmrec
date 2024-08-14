@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     return (
@@ -31,7 +30,7 @@ export function Header() {
                             <div className="flex flex-shrink-0 items-center">
                                 <div className="flex items-center text-white font-extrabold">
                                     <Image className="h-14 w-14" width={50} height={50} src="/6mm_logo.png" alt="logo 6mmm" />
-                                    <div className="ml-2 text-2xl">6mm<span className="text-red-700">Rec</span></div>
+                                    <div className="ml-2 text-2xl uppercase">6mm<span className="text-red-700">Rec</span></div>
                                 </div>
                             </div>
                             <div className="hidden sm:flex sm:items-center sm:ml-6">

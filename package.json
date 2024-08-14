@@ -9,7 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@portabletext/react": "^3.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@sanity/client": "^6.21.2",
+    "@sanity/icons": "^3.3.1",
+    "@sanity/image-url": "^1.0.2",
+    "@sanity/react-loader": "^1.10.6",
+    "@sanity/vision": "^3.53.0",
+    "@sanity/visual-editing": "^2.1.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.1.7",
@@ -17,9 +24,12 @@
     "lucide-react": "^0.416.0",
     "mongoose": "^8.5.1",
     "next": "14.2.5",
+    "next-sanity": "^9.4.5",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
+    "sanity": "^3.53.0",
+    "styled-components": "^6.1.12",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7"
   },

@@ -24,7 +24,7 @@ export default function Tournament() {
             <CardContent className="relative p-4 font-semibold flex flex-col justify-center">
               <Image layout="fixed" src="/stunhouse_cqb.svg" alt="stunhouse cqb image" width={150} height={80} />
               <div>StunHouse CQB 5v5</div>
-              <span>14 Set 2024</span>
+              <span>14 July 2024</span>
               <div className="absolute p-2 bg-[#00000080] top-0 right-0">Finish</div>
             </CardContent>
           </Card>
