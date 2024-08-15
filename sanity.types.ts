@@ -68,6 +68,160 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Tournament = {
+  _id: string;
+  _type: "tournament";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  date?: string;
+  gameGoals?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "gameGoals";
+  }>;
+  teams?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "teams";
+  }>;
+  status?: "playing" | "schedule" | "finish";
+  isActive?: boolean;
+  rounds?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "rounds";
+  }>;
+};
+
+export type Rounds = {
+  _id: string;
+  _type: "rounds";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  team1?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "teams";
+  };
+  team2?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "teams";
+  };
+  team1Achievements?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "gameGoals";
+  }>;
+  team2Achievements?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "gameGoals";
+  }>;
+  roundTime?: number;
+  isFinish?: boolean;
+};
+
+export type Teams = {
+  _id: string;
+  _type: "teams";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  teamName?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  city?: string;
+};
+
+export type Partners = {
+  _id: string;
+  _type: "partners";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  partnerName?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  link?: string;
+  bio?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
+export type GameGoals = {
+  _id: string;
+  _type: "gameGoals";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  goal?: string;
+  icon?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  points?: number;
+};
+
 export type Post = {
   _id: string;
   _type: "post";
@@ -278,7 +432,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Tournament | Rounds | Teams | Partners | GameGoals | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_QUERY
@@ -289,38 +443,38 @@ export type POSTS_QUERYResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
-  author: {
+  title?: string;
+  slug?: Slug;
+  author?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "author";
   };
-  mainImage: {
-    asset: {
+  mainImage?: {
+    asset?: {
       _ref: string;
       _type: "reference";
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
-    hotspot: SanityImageHotspot;
-    crop: SanityImageCrop;
-    alt: string;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
     _type: "image";
   };
-  categories: Array<{
+  categories?: Array<{
     _ref: string;
     _type: "reference";
     _weak?: boolean;
     _key: string;
     [internalGroqTypeReferenceTo]?: "category";
   }>;
-  publishedAt: string;
-  body: Array<{
-    children: Array<{
-      marks: Array<string>;
-      text: string;
+  publishedAt?: string;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
       _type: "span";
       _key: string;
     }>;
@@ -422,4 +576,3 @@ export type POST_QUERYResult = {
     _key: string;
   }>;
 } | null;
-
