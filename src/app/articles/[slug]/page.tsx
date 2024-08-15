@@ -1,5 +1,4 @@
 import { Heading } from "@/components/Heading";
-import { getClient } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { SanityDocument } from "@sanity/client";
 import Image from "next/image";
@@ -13,9 +12,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { sanityFetch } from "@/sanity/lib/client";
+import { internalGroqTypeReferenceTo } from "../../../../sanity.types";
+import { Post } from "@/components/@Types";
 
 const buildQueryWithParam = (slug: string) => `*[_type == "post" && slug.current == '${slug}']
   {
+    "id": _id,
     title,
     publishedAt,
     mainImage,
@@ -28,10 +31,17 @@ export default async function Article({
   }: {
     params: { slug: string }
   }) {
-    const client = getClient();
-    const article = await client.fetch<SanityDocument[]>(buildQueryWithParam(params.slug));
-    const articleDate = new Date(article.publishedAt).toUTCString();
-    console.log(article)
+    const article = await sanityFetch<Post>({
+      query: buildQueryWithParam(params.slug),
+      params: { slug: params.slug }
+    });
+
+
+    if (!article) {
+      return <>not found</>
+    }
+
+    const articleDate = new Date(article.publishedAt!).toUTCString();
 
   return (
     <section className="container text-white">
@@ -62,17 +72,17 @@ export default async function Article({
             <CardContent className="m-10">
               <section className="">
                 <div className="hidden sm:block lg:cursor-pointer" style={{ position: 'relative', height: '415px' }}>
-                  <Image src={urlFor(article.mainImage.asset).url()} alt={article.mainImage.alt} fill sizes="100%" style={{ objectFit: 'cover' }} />
+                  <Image src={urlFor(article.mainImage!.asset!).url()} alt={`${article.mainImage!.alt}`} fill sizes="100%" style={{ objectFit: 'cover' }} />
                 </div>
                 <div className="sm:hidden lg:cursor-pointer" style={{ position: 'relative', height: '215px' }}>
-                  <Image src={urlFor(article.mainImage.asset).url()} alt={article.mainImage.alt} fill sizes="100%" style={{ objectFit: 'cover' }} />
+                  <Image src={urlFor(article.mainImage!.asset!).url()} alt={`${article.mainImage!.alt}`} fill sizes="100%" style={{ objectFit: 'cover' }} />
                 </div>
                 <div>
                   <Card className="max-w-fit p-4 mt-10 border-none bg-[#2F3541]">
                     <div className="flex items-center">
-                      <Image src={urlFor(article.author.image.asset).url()} alt="author" width={100} height={100} className="mr-4 rounded-xl" />
+                      <Image src={urlFor(article.author.image.asset!).url()} alt="author" width={100} height={100} className="mr-4 rounded-xl" />
                       <div className="text-gray-300 text-lg">
-                        <div className="font-semibold">{article.author.name}</div>
+                        <div className="text-sm">Author: <span className="font-semibold text-lg">{article.author!.name!}</span></div>
                         <div className="text-sm">{articleDate}</div>
                       </div>
                     </div>
@@ -83,7 +93,7 @@ export default async function Article({
                 <h1 className="mt-10 pb-6 font-semibold text-4xl uppercase tracking-wide text-white">{article.title}</h1>
                 <div className="text-[#838D9F]">
                   <PortableText
-                    value={article.body}
+                    value={article.body!}
                     onMissingComponent={false}
                   />
                 </div>

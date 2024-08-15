@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "npm run typegen",
+    "prebuild": "npm run typegen",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typegen": "sanity schema extract && sanity typegen generate"
   },
   "dependencies": {
     "@portabletext/react": "^3.1.0",
