@@ -1,16 +1,16 @@
-import {DocumentTextIcon} from '@sanity/icons'
+import { TbPentagram } from "react-icons/tb";
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const roundType = defineType({
   name: 'rounds',
   title: 'Rounds',
   type: 'document',
-  icon: DocumentTextIcon,
+  icon: TbPentagram,
   fields: [
     defineField({
-      name: 'title',
-      type: 'string',
-    }),
+			name: 'date',
+			type: 'datetime'
+		}),
     defineField({
       name: 'team1',
       type: 'reference',
@@ -41,4 +41,18 @@ export const roundType = defineType({
       type: 'boolean',
     }),
   ],
+  preview: {
+    select: {
+      date: 'date',
+      title1: 'team1.teamName',
+      title2: 'team2.teamName',
+    },
+    prepare({ date, title1, title2 }) {
+			const icon = status === 'playing' ? '▶️' : status === 'schedule' ? '🗓️' : '✅';
+      return {
+        title: new Date(date).toUTCString(),
+        subtitle: `${title1} Vs ${title2}`,
+      }
+    }
+  },
 })

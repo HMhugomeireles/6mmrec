@@ -8,10 +8,6 @@ export const tournamentType = defineType({
 	icon: TfiCup,
 	fields: [
 		defineField({
-      name: 'title',
-      type: 'string',
-    }),
-		defineField({
 			name: 'date',
 			type: 'datetime',
 		}),
@@ -31,7 +27,8 @@ export const tournamentType = defineType({
 			options: {
 				list: ['playing', 'schedule', 'finish'],
 				layout: 'dropdown'
-			}
+			},
+			initialValue: 'schedule'
 		}),
 		defineField({
 			name: 'isActive',
@@ -42,5 +39,24 @@ export const tournamentType = defineType({
 			type: 'array',
 			of: [defineArrayMember({ type: 'reference', to: { type: 'rounds' } })],
 		}),
-	]
+		defineField({
+      name: 'rules',
+      type: 'blockContent',
+    }),
+	],
+	preview: {
+    select: {
+      title: 'date',
+			status: 'status',
+			date: 'date'
+    },
+		prepare({ date, status, title }) {
+			const icon = status === 'playing' ? '▶️' : status === 'schedule' ? '🗓️' : '✅';
+      return {
+        title: `${icon} ${title}`,
+        subtitle: new Date(date).toUTCString(),
+				media: ''
+      }
+    }
+  },
 })

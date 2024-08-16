@@ -8,16 +8,13 @@ export const gameGoalsType = defineType({
   icon: GoGoal,
   fields: [
     defineField({
-      name: 'title',
-      type: 'string',
-    }),
-    defineField({
       name: 'goal',
       type: 'string',
     }),
     defineField({
-      name: 'icon',
+      name: 'image',
       type: 'image',
+      title: 'Icon',
       options: {
         hotspot: true,
       },
@@ -29,7 +26,7 @@ export const gameGoalsType = defineType({
   ],
   preview: {
     select: {
-      title: 'name',
+      title: 'goal',
       media: 'image',
     },
   },

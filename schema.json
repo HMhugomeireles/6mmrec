@@ -897,13 +897,6 @@
           "type": "string"
         }
       },
-      "title": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "partnerName": {
         "type": "objectAttribute",
         "value": {

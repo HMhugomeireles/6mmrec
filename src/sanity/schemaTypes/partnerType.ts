@@ -5,11 +5,12 @@ export const partnerType = defineType({
   name: 'partners',
   title: 'Partners',
   type: 'document',
-  //icon: PiHandshake,
+  icon: PiHandshake,
   fields: [
     defineField({
       name: 'partnerName',
       type: 'string',
+      title: 'Partner Name'
     }),
     defineField({
       name: 'image',
@@ -17,6 +18,13 @@ export const partnerType = defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+        }
+      ]
     }),
     defineField({
       name: 'link',
@@ -36,7 +44,7 @@ export const partnerType = defineType({
   ],
   preview: {
     select: {
-      title: 'name',
+      title: 'partnerName',
       media: 'image',
     },
   },

@@ -8,16 +8,13 @@ export const teamsType = defineType({
   icon: UsersIcon,
   fields: [
     defineField({
-      name: 'title',
-      type: 'string',
-    }),
-    defineField({
       name: 'teamName',
       type: 'string',
     }),
     defineField({
       name: 'image',
       type: 'image',
+      title: 'Icon',
       options: {
         hotspot: true,
       },
@@ -29,7 +26,7 @@ export const teamsType = defineType({
   ],
   preview: {
     select: {
-      title: 'name',
+      title: 'teamName',
       media: 'image',
     },
   },

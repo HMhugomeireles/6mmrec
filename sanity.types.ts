@@ -166,7 +166,6 @@ export type Partners = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title?: string;
   partnerName?: string;
   image?: {
     asset?: {
