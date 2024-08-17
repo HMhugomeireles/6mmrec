@@ -20,6 +20,7 @@ import Image from "next/image";
 import { getTournamentDetails } from "../actions";
 import { urlFor } from "@/sanity/lib/image";
 import { TfiCup } from "react-icons/tfi";
+import { PortableText } from "next-sanity";
 
 export const revalidate = process.env.NODE_ENV === "development" ? 60 : 3600
 
@@ -79,18 +80,39 @@ export default async function Tournament({ params }: { params: { tournamentId: s
 
         
         <section>
-          <Tabs defaultValue="info" className="w-[400px]">
-            <TabsList>
-              <TabsTrigger value="info">Information</TabsTrigger>
-              <TabsTrigger value="game">Games</TabsTrigger>
+          <Tabs defaultValue="info" className="mt-10">
+            <TabsList className="bg-transparent">
+              <TabsTrigger value="info" className="p-4 m-4">Information</TabsTrigger>
+              <TabsTrigger value="game" className="p-4 m-4">Games</TabsTrigger>
+              <TabsTrigger value="goals" className="p-4 m-4">Goals</TabsTrigger>
             </TabsList>
-            <TabsContent value="info"></TabsContent>
+            <TabsContent value="info" className="">
+              <section>
+                <Heading text="Tournament Information" />
+              </section>
+              {Boolean(tournamentDetails.details.information) ?
+                (
+                  <div className="bg-card text-white p-10 mb-10">
+                    <PortableText
+                      value={tournamentDetails.details.information}
+                      onMissingComponent={false}
+                    />
+                  </div>
+                )
+                :
+                (
+                  <div className="text-[#838D9F]">
+                    Don't have information at this time!
+                  </div>
+                )
+              }
+            </TabsContent>
             <TabsContent value="game">
               <section>
                 <Heading text="Games" />
               </section>
 
-              <section className="mt-10 mb-10 lg:flex lg:flex-wrap">
+              <section className="mt-10 mb-10 lg:flex lg:flex-wrap-reverse lg:justify-center">
                 {Boolean(tournamentDetails.details.rounds) && tournamentDetails.details.rounds.map(round => {
                   let totalPointsTeam1= 0
                   let totalPointsTeam2= 0
@@ -116,9 +138,9 @@ export default async function Tournament({ params }: { params: { tournamentId: s
                           
                         </div>
                         <div className="text-sm font-bold text-center text-white">
-                            <div className="flex pl-10">{Boolean(round.team1Achievements) ? round.team1Achievements.reduce((prev, curr) => prev + curr.points, 0) : 0}p</div>
+                            <div className="flex pl-10">{totalPointsTeam1}p</div>
                             <div>Vs</div>
-                            <div className="flex justify-end pr-10">{Boolean(round.team1Achievements) ? round.team1Achievements.reduce((prev, curr) => prev + curr.points, 0) : 0}p</div>
+                            <div className="flex justify-end pr-10">{totalPointsTeam2}p</div>
                         </div>
                         <div className="m-4">
                           <div className="flex items-center relative justify-end">
@@ -132,6 +154,24 @@ export default async function Tournament({ params }: { params: { tournamentId: s
                     </Card>
                   )
                 })}
+              </section>
+            </TabsContent>
+            <TabsContent value="goals">
+              <section>
+                <Heading text="Game Goals" />
+              </section>
+              <section className="p-2 mb-10 bg-card lg:flex lg:flex-wrap">
+                {Boolean(tournamentDetails.details.gameGoals) && tournamentDetails.details.gameGoals.map(goal => (
+                  <Card key={goal.id} className="border-none p-2 shadow-none">
+                    <CardContent className="flex flex-row items-center text-white">
+                      <Image src={urlFor(goal.image.asset).url()} alt="team image" width={80} height={80} className="mr-10" />
+                      <div>
+                        <div className="font-semibold">{goal.goal}</div>
+                        <div>Points: <span className={`${goal.points < 0 ? 'text-red-600' : 'text-green-800'} text-xl font-bold`}>{goal.points}</span></div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
               </section>
             </TabsContent>
           </Tabs>

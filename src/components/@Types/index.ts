@@ -120,4 +120,5 @@ export type TournamentsType = {
     teams: TeamType[]
     gameGoals: GaolType[]
     rounds: RoundType[]
+    information: any;
 }

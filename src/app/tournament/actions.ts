@@ -171,6 +171,7 @@ export async function getTournamentDetails(tournamentId: string) {
   const QUERY_TOURNAMENT = `
     *[_type == "tournaments" && _id == '${tournamentId}'] {
       "id": _id,
+      "information": rules,
       status,
       date,
       teams[]-> {
@@ -181,9 +182,9 @@ export async function getTournamentDetails(tournamentId: string) {
       },
         gameGoals[]-> {
           "id": _id,
-        points,
-        goal,
-        icon
+          points,
+          goal,
+          image
         },
         isActive,
         rounds[]-> {

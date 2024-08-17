@@ -46,6 +46,7 @@ export const tournamentsType = defineType({
 		defineField({
       name: 'rules',
       type: 'blockContent',
+			title: 'Tournament Information'
     }),
 	],
 	preview: {
