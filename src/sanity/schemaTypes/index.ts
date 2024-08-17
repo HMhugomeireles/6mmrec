@@ -8,7 +8,7 @@ import { gameGoalsType } from './gameGoalsType'
 import { partnerType } from './partnerType'
 import { teamsType } from './teamsType'
 import { roundType } from './roundsType'
-import { tournamentType } from './tournamentType'
+import { tournamentsType } from './tournamentType'
 import { productType } from './productType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
@@ -21,7 +21,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     partnerType,
     teamsType,
     roundType,
-    tournamentType,
+    tournamentsType,
     productType
   ],
 }

@@ -70,3 +70,54 @@ export type PartnersType = {
     partnerName: string;
     bio: any;
 }
+
+export type TeamType = {
+    id: string;
+    city: string;
+    teamName:string;
+    image: {
+        _type: string;
+        asset: {
+            _ref: string;
+            _type: string;
+        }
+    }
+}
+
+type GaolType = {
+    id: string;
+    points: number;
+    goal:string;
+    image: {
+        _type: string;
+        asset: {
+            _ref: string;
+            _type: string;
+        }
+    }
+}
+
+export type GlobalRanking = {
+    points: number;
+    teamDetails: TeamType
+}
+
+export type RoundType = {
+    id: string;
+    isFinish: boolean;
+    roundTime: number;
+    date: string;
+    team1: TeamType;
+    team2: TeamType;
+    team1Achievements: GaolType[],
+    team2Achievements: GaolType[]
+}
+
+export type TournamentsType = {
+    id: string;
+    date: string;
+    status: "finish" | "playing" | "schedule" | string;
+    teams: TeamType[]
+    gameGoals: GaolType[]
+    rounds: RoundType[]
+}

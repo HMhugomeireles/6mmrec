@@ -22,7 +22,7 @@ export function Footer() {
                                 <div className="cursor-pointer" onClick={() => window.open('https://www.instagram.com/6mmrec/', '_blank', 'noopener,noreferrer')}>
                                     <FaInstagram className="text-4xl hover:opacity-90" />
                                 </div>
-                                <div className="cursor-pointer ml-8" onClick={() => window.open('https://www.instagram.com/6mmrec/', '_blank', 'noopener,noreferrer')}>
+                                <div className="cursor-pointer ml-8" onClick={() => window.open('https://l.instagram.com/?u=https%3A%2F%2Fchat.whatsapp.com%2FFH1mrAJdqYPL3BzfKVBfdB&e=AT0fjEdM_qJN6RVOhBvuNSv5wTT1SFImiTpacellnuxiQSB1fREvy0NFChmO1XHAyH20gqyiqyl6e4-GwOqmsGi2Ijg3UbroGd0OZBDgwrxCJGieLVdNhQ', '_blank', 'noopener,noreferrer')}>
                                     <FaWhatsapp className="text-4xl hover:opacity-90" />
                                 </div>
                             </div>

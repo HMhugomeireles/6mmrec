@@ -25,11 +25,13 @@ export const roundType = defineType({
       name: 'team1Achievements',
       type: 'array',
       of: [defineArrayMember({type: 'reference', to: {type: 'gameGoals'}})],
+      initialValue: []
     }),
     defineField({
       name: 'team2Achievements',
       type: 'array',
       of: [defineArrayMember({type: 'reference', to: {type: 'gameGoals'}})],
+      initialValue: []
     }),
     defineField({
       name: 'roundTime',
@@ -39,6 +41,7 @@ export const roundType = defineType({
     defineField({
       name: 'isFinish',
       type: 'boolean',
+      initialValue: false
     }),
   ],
   preview: {

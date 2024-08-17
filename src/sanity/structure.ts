@@ -12,7 +12,7 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('gameGoals').title('Game Goals'),
       S.documentTypeListItem('teams').title('Teams'),
       S.documentTypeListItem('rounds').title('Rounds'),
-      S.documentTypeListItem('tournament').title('Tournaments'),
+      S.documentTypeListItem('tournaments').title('Tournaments'),
       S.documentTypeListItem('products').title('Products'),
       S.divider(),
       ...S.documentTypeListItems().filter(
@@ -24,7 +24,7 @@ export const structure: StructureResolver = (S) =>
           'gameGoals',
           'teams',
           'rounds',
-          'tournament',
+          'tournaments',
           'products',
         ].includes(item.getId()!),
       ),

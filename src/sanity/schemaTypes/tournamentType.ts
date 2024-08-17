@@ -1,8 +1,8 @@
 import { TfiCup } from "react-icons/tfi";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-export const tournamentType = defineType({
-	name: 'tournament',
+export const tournamentsType = defineType({
+	name: 'tournaments',
 	title: 'Tournaments',
 	type: 'document',
 	icon: TfiCup,
@@ -15,11 +15,13 @@ export const tournamentType = defineType({
 			name: 'gameGoals',
 			type: 'array',
 			of: [defineArrayMember({ type: 'reference', to: { type: 'gameGoals' } })],
+			initialValue: []
 		}),
 		defineField({
 			name: 'teams',
 			type: 'array',
 			of: [defineArrayMember({ type: 'reference', to: { type: 'teams' } })],
+			initialValue: []
 		}),
 		defineField({
 			name: 'status',
@@ -33,11 +35,13 @@ export const tournamentType = defineType({
 		defineField({
 			name: 'isActive',
 			type: 'boolean',
+			initialValue: false
 		}),
 		defineField({
 			name: 'rounds',
 			type: 'array',
 			of: [defineArrayMember({ type: 'reference', to: { type: 'rounds' } })],
+			initialValue: []
 		}),
 		defineField({
       name: 'rules',
