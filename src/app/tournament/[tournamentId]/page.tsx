@@ -102,7 +102,7 @@ export default async function Tournament({ params }: { params: { tournamentId: s
                 :
                 (
                   <div className="text-[#838D9F]">
-                    Don't have information at this time!
+                    {"Don't have information at this time!"}
                   </div>
                 )
               }
