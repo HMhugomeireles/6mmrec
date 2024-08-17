@@ -75,7 +75,7 @@ export default async function Tournament() {
           {globalRanking.map((teamPosition, index) => {
             if (index === 0) {
               return (
-                <Card className="mb-4">
+                <Card key={teamPosition.teamDetails.id} className="mb-4">
                   <CardContent className="p-0 relative" style={{ position: 'relative', height: '350px'}}>
                     <Image src={urlFor(teamPosition.teamDetails.image.asset!).url()} alt="team image" fill sizes="100%" style={{ objectFit: 'cover' }} />
                     <FaMedal className="absolute right-0 text-yellow-500 text-6xl" />
@@ -89,7 +89,7 @@ export default async function Tournament() {
             }
             if (index === 1) {
               return (
-                <Card className="mb-4">
+                <Card key={teamPosition.teamDetails.id} className="mb-4">
                   <CardContent className="p-0 relative" style={{ position: 'relative', height: '350px'}}>
                     <Image src={urlFor(teamPosition.teamDetails.image.asset!).url()} alt="team image" fill sizes="100%" style={{ objectFit: 'cover' }} />
                     <FaMedal className="absolute right-0 text-amber-700 text-6xl" />
@@ -103,7 +103,7 @@ export default async function Tournament() {
             }
             if (index === 2) {
               return (
-                <Card className="mb-4">
+                <Card key={teamPosition.teamDetails.id} className="mb-4">
                   <CardContent className="p-0 relative" style={{ position: 'relative', height: '350px'}}>
                     <Image src={urlFor(teamPosition.teamDetails.image.asset!).url()} alt="team image" fill sizes="100%" style={{ objectFit: 'cover' }} />
                     <FaMedal className="absolute right-0 text-gray-500 text-6xl" />
