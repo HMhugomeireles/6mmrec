@@ -4,26 +4,16 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+  TableRow
+} from "@/components/ui/table";
+import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import Link from "next/link";
 import { FaMedal } from "react-icons/fa6";
-import { GrSchedules } from "react-icons/gr";
 import { GiPistolGun } from "react-icons/gi";
+import { GrSchedules } from "react-icons/gr";
 import { MdOutlineDownloadDone } from "react-icons/md";
 import { getGlobalRanking, getTournamentList } from "./actions";
-import Link from "next/link";
-import { urlFor } from "@/sanity/lib/image";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
 
 export default async function Tournament() {
   const tournamentList = await getTournamentList();
@@ -32,7 +22,7 @@ export default async function Tournament() {
   return (
     <section className="container">
       <section className="w-full">
-        <section className="mt-10">
+        {/* <section className="mt-10">
           <Breadcrumb className="text-white">
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -44,7 +34,7 @@ export default async function Tournament() {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-        </section>
+        </section> */}
 
         <section>
           <Heading text="Tournaments" />

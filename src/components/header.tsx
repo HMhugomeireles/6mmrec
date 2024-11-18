@@ -1,9 +1,7 @@
 'use client'
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 
 export function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -12,7 +10,7 @@ export function Header() {
             <div className="lg:container">
                 <div className="lg:p-0 lg:max-w-full">
                     <div className="relative flex items-center justify-between">
-                        <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
+                        {/* <div className="absolute inset-y-0 right-0 flex items-center sm:hidden">
                             <Button onClick={() => setIsMenuOpen(prev => !prev)} variant="link" className="relative inline-flex items-center justify-center select-none rounded-md p-2 opacity-85 hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
                                 <span className="absolute -inset-0.5"></span>
                                 <span className="sr-only">Open main menu</span>
@@ -25,7 +23,7 @@ export function Header() {
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </Button>
-                        </div>
+                        </div> */}
                         <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-between">
                             <div className="flex flex-shrink-0 items-center">
                                 <div className="flex items-center text-white font-extrabold">
@@ -33,18 +31,18 @@ export function Header() {
                                     <div className="ml-2 text-2xl uppercase">6mm<span className="text-red-700">Rec</span></div>
                                 </div>
                             </div>
-                            <div className="hidden sm:flex sm:items-center sm:ml-6">
+                            {/* <div className="hidden sm:flex sm:items-center sm:ml-6">
                                 <div className="flex space-x-4 items-center">
                                     <Link href="/" className="rounded-md px-3 py-2 text-sm font-extrabold uppercase text-white" aria-current="page">News</Link>
                                     <Link href="/tournament" className="rounded-md px-3 py-2 text-sm font-extrabold uppercase text-gray-300 hover:border-background hover:text-white">Tournament</Link>
                                     <Link href="/partners" className="rounded-md px-3 py-2 text-sm font-extrabold uppercase text-gray-300 hover:bg-gray-700 hover:text-white">Partners</Link>
                                     <Link href="/shop" className="rounded-md px-3 py-2 text-sm font-extrabold uppercase text-gray-300 hover:bg-gray-700 hover:text-white">Shop</Link>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
-                {isMenuOpen && (
+                {/* {isMenuOpen && (
                     <div className="sm:hidden" id="mobile-menu">
                         <div className="space-y-2 px-2 pb-3 pt-2">
                             <Link onClick={() => setIsMenuOpen(prev => !prev)} href="/" className="block rounded-md px-3 py-2 text-base font-extrabold uppercase text-white" aria-current="page">News</Link>
@@ -53,7 +51,7 @@ export function Header() {
                             <Link onClick={() => setIsMenuOpen(prev => !prev)} href="/shop" className="block rounded-md px-3 py-2 text-base font-extrabold uppercase text-gray-300 hover:bg-gray-700 hover:text-white">Shop</Link>
                         </div>
                     </div>                    
-                )}
+                )} */}
             </div>
 
         </header>
