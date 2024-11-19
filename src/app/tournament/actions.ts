@@ -99,7 +99,7 @@ export async function getGlobalRanking() {
 async function createRanking(tournaments: TournamentsType[]) {
   const ranking: IObject = {}
   for (const tournament of tournaments) {
-    if (tournament.status === 'finish') {
+    if (tournament.status === 'finish' && tournament.rounds) {
       calculateTeamsRoundPoints(tournament.rounds, ranking)
       
       tournament.teams.forEach(team => {
