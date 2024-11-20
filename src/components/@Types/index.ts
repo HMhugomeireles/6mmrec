@@ -84,7 +84,7 @@ export type TeamType = {
     }
 }
 
-type GaolType = {
+export type GaolType = {
     id: string;
     points: number;
     goal:string;

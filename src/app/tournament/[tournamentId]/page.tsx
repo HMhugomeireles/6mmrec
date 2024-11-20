@@ -1,26 +1,18 @@
+import { GaolType } from "@/components/@Types";
 import { Heading } from "@/components/Heading";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList } from "@/components/ui/breadcrumb";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
-  TableRow,
-} from "@/components/ui/table"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+  TableRow
+} from "@/components/ui/table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { urlFor } from "@/sanity/lib/image";
+import { PortableText } from "next-sanity";
 import Image from "next/image";
 import { getTournamentDetails } from "../actions";
-import { urlFor } from "@/sanity/lib/image";
-import { TfiCup } from "react-icons/tfi";
-import { PortableText } from "next-sanity";
 
 export const revalidate = process.env.NODE_ENV === "development" ? 60 : 3600
 
@@ -39,15 +31,7 @@ export default async function Tournament({ params }: { params: { tournamentId: s
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
                 <BreadcrumbLink href="/tournament">Tournament</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage className="text-[#838D9F]">{new Date(tournamentDetails.details.date).toUTCString()}</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -78,12 +62,12 @@ export default async function Tournament({ params }: { params: { tournamentId: s
           </Table>
         </section>
 
-        
+
         <section>
           <Tabs defaultValue="info" className="mt-10">
             <TabsList className="bg-transparent">
               <TabsTrigger value="info" className="p-4 m-4">Information</TabsTrigger>
-              <TabsTrigger value="game" className="p-4 m-4">Games</TabsTrigger>
+              <TabsTrigger value="game" className="p-4 m-4">Rounds</TabsTrigger>
               <TabsTrigger value="goals" className="p-4 m-4">Goals</TabsTrigger>
             </TabsList>
             <TabsContent value="info" className="">
@@ -112,7 +96,49 @@ export default async function Tournament({ params }: { params: { tournamentId: s
                 <Heading text="Games" />
               </section>
 
-              <section className="mt-10 mb-10 lg:flex lg:flex-wrap-reverse lg:justify-center">
+              <Table className="max-w-full">
+                <TableBody className="text-white">
+                  {Boolean(tournamentDetails.details.rounds) && tournamentDetails.details.rounds.map(round => {
+                    const calculateTeamPoints = (achievements: GaolType[]) => {
+                      return achievements.reduce((acc, achievement) => {
+                      acc.totalPoints += achievement.points;
+                      acc.achievements.push(achievement);
+                      return acc;
+                      }, {
+                      totalPoints: 0,
+                      achievements: [] as GaolType[]
+                      });
+                    };
+
+                    const team1 = round.team1Achievements ? calculateTeamPoints(round.team1Achievements) : { totalPoints: 0, achievements: [] };
+                    const team2 = round.team2Achievements ? calculateTeamPoints(round.team2Achievements) : { totalPoints: 0, achievements: [] };
+                    return (
+                      <>
+                        <TableRow key={round.id} className="bg-card border-secondary border-2">
+                          <TableCell>
+                            <div className="flex items-center">
+                              <Image src={urlFor(round.team1.image.asset).url()} alt="team image" width={80} height={80} />
+                              <div className="ml-4">{round.team1.teamName}</div>
+                            </div>
+                            <div className="flex mt-4">{team1.achievements.map(achievement => <Image key={achievement.id} src={urlFor(achievement.image.asset).url()} alt="goal image" width={25} height={25} />)}</div>
+                          </TableCell>
+                          <TableCell className={`font-bold text-2xl ${team1.totalPoints > team2.totalPoints ? "text-green-700" : "text-red-700"}`}>{team1.totalPoints}</TableCell>
+                          <TableCell>-</TableCell>
+                          <TableCell className={`font-bold text-2xl ${team2.totalPoints > team1.totalPoints ? "text-green-700" : "text-red-700"}`}>{team2.totalPoints}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center">
+                              <Image src={urlFor(round.team2.image.asset).url()} alt="team image" width={80} height={80} />
+                              <div className="ml-4">{round.team2.teamName}</div>
+                            </div>
+                            <div className="flex mt-4">{team2.achievements.map(achievement => <Image key={achievement.id} src={urlFor(achievement.image.asset).url()} alt="goal image" width={25} height={25} />)}</div>
+                          </TableCell>
+                        </TableRow>
+                      </>
+                    )
+                  })}
+                </TableBody>
+              </Table>
+              {/* <section className="mt-10 mb-10 lg:flex lg:flex-wrap-reverse lg:justify-center">
                 {Boolean(tournamentDetails.details.rounds) && tournamentDetails.details.rounds.map(round => {
                   let totalPointsTeam1= 0
                   let totalPointsTeam2= 0
@@ -154,7 +180,7 @@ export default async function Tournament({ params }: { params: { tournamentId: s
                     </Card>
                   )
                 })}
-              </section>
+              </section> */}
             </TabsContent>
             <TabsContent value="goals">
               <section>
