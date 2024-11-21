@@ -17,7 +17,7 @@ export default function Layout({
   return (
     <html lang="en" className={inter.className}>
       <body>
-      <div className="text-foreground w-full flex flex-col h-screen justify-between">
+      <div className="text-foreground w-full">
         <main>{children}</main>
       </div>
       </body>
