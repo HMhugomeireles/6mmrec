@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "../../globals.css";
+import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +17,7 @@ export default function Layout({
   return (
     <html lang="en" className={inter.className}>
       <body>
-      <div className="z-10 top-0 left-0 absolute text-foreground w-full flex flex-col h-screen justify-between">
+      <div className="text-foreground w-full flex flex-col h-screen justify-between">
         <main>{children}</main>
       </div>
       </body>
